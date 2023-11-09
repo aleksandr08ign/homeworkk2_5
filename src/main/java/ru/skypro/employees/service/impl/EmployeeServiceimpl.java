@@ -1,17 +1,17 @@
 package ru.skypro.employees.service.impl;
 
-import ru.skypro.employees.service.EmployeeService;
+import org.springframework.stereotype.Service;
 import ru.skypro.employees.employee.Employee;
+import ru.skypro.employees.service.EmployeeService;
 import ru.skypro.exception.EmployeeAlreadyAddedException;
 import ru.skypro.exception.EmployeeNotFoundException;
 import ru.skypro.exception.EmployeeStorageIsFullException;
 
-
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class EmployeeServiceimpl implements EmployeeService {
-    private final int maxSize = 10;
+    private final int maxSize = 3;
 
     private final List<Employee> employees = new ArrayList<>();
 
@@ -49,6 +49,12 @@ public class EmployeeServiceimpl implements EmployeeService {
             }
         }
         throw new EmployeeNotFoundException("Сотрудник " + firstName + " " + lastName + " не найден.");
+    }
+
+    @Override
+    public List<Employee> getAll() {
+
+        return new ArrayList<>(employees);
     }
 
 }
